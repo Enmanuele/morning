@@ -105,10 +105,7 @@
 
         .sparkle {
             position: absolute;
-            width: 10px;
-            height: 10px;
-            background: white;
-            border-radius: 50%;
+            font-size: 25px;
             animation: sparkle 3s infinite;
         }
 
@@ -129,8 +126,8 @@
     <div class="container">
         <div class="sun">☀️</div>
         <h1>¡Buenos Días!</h1>
-        <div class="name" id="nombre">Amigo</div>
-        <div class="message">Que tenga un día maravilloso ✨</div>
+        <div class="name" id="nombre"></div>
+        <div class="message">Que este día esté lleno de éxitos y de momentos especiales, porque tú mereces todo lo bueno. ¡Buenos días!</div>
     </div>
 
     <script>
@@ -141,11 +138,13 @@
         // Actualizar el nombre en la página
         document.getElementById('nombre').textContent = nombre;
 
-        // Crear efecto de estrellas
+        // Crear efecto de flores
         const sparklesContainer = document.getElementById('sparkles');
+        const flores = ['🌸', '🌺', '🌼', '🌻', '🌷', '🌹'];
         for (let i = 0; i < 20; i++) {
             const sparkle = document.createElement('div');
             sparkle.className = 'sparkle';
+            sparkle.textContent = flores[Math.floor(Math.random() * flores.length)];
             sparkle.style.left = Math.random() * 100 + '%';
             sparkle.style.top = Math.random() * 100 + '%';
             sparkle.style.animationDelay = Math.random() * 3 + 's';

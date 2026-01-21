@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buenos Días</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        /* Tema Amanecer */
+        body.amanecer {
+            background: linear-gradient(to bottom, #FF6B6B 0%, #FFD93D 50%, #6BCF7F 100%);
+        }
+
+        /* Tema Océano */
+        body.oceano {
+            background: linear-gradient(135deg, #667eea 0%, #00d4ff 50%, #4facfe 100%);
+        }
+
+        /* Tema Jardín */
+        body.jardin {
+            background: linear-gradient(to bottom right, #ffecd2 0%, #fcb69f 50%, #ff9a9e 100%);
+        }
+
+        /* Tema Noche Estrellada */
+        body.noche {
+            background: linear-gradient(to bottom, #0f0c29 0%, #302b63 50%, #24243e 100%);
+        }
+
+        /* Tema Primavera */
+        body.primavera {
+            background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 50%, #ffecd2 100%);
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            font-size: 30px;
+            animation: float 4s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                opacity: 0;
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-50px) rotate(180deg);
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 50px 40px;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 30px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .icon {
+            font-size: 90px;
+            animation: bounce 2.5s infinite;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-25px) scale(1.1); }
+        }
+
+        h1 {
+            font-size: 3.5em;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .name {
+            font-size: 3.5em;
+            font-weight: bold;
+            color: #333;
+            margin: 25px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .poema {
+            font-size: 1.3em;
+            color: #555;
+            line-height: 1.8;
+            margin: 30px 0;
+            font-style: italic;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            text-align: left;
+        }
+
+        .controls {
+            margin-top: 30px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn-amanecer {
+            background: linear-gradient(135deg, #FF6B6B, #FFD93D);
+            color: white;
+        }
+
+        .btn-oceano {
+            background: linear-gradient(135deg, #667eea, #00d4ff);
+            color: white;
+        }
+
+        .btn-jardin {
+            background: linear-gradient(135deg, #ffecd2, #fcb69f);
+            color: #333;
+        }
+
+        .btn-noche {
+            background: linear-gradient(135deg, #0f0c29, #302b63);
+            color: white;
+        }
+
+        .btn-primavera {
+            background: linear-gradient(135deg, #a1c4fd, #ffecd2);
+            color: #333;
+        }
+    </style>
+</head>
+<body class="amanecer">
+    <div class="particles" id="particles"></div>
+    <div class="container">
+        <div class="icon" id="icon">☀️</div>
+        <h1>¡Buenos Días!</h1>
+        <div class="name" id="nombre">Amigo</div>
+        <div class="poema" id="poema">
+            Despierta con el sol naciente,<br>
+            un nuevo día te espera paciente.<br>
+            Llena tu alma de esperanza brillante,<br>
+            y haz de este día algo fascinante.
+        </div>
+        <!-- <div class="controls">
+            <button class="btn btn-amanecer" onclick="cambiarTema('amanecer')">🌅 Amanecer</button>
+            <button class="btn btn-oceano" onclick="cambiarTema('oceano')">🌊 Océano</button>
+            <button class="btn btn-jardin" onclick="cambiarTema('jardin')">🌺 Jardín</button>
+            <button class="btn btn-noche" onclick="cambiarTema('noche')">🌙 Noche</button>
+            <button class="btn btn-primavera" onclick="cambiarTema('primavera')">🌸 Primavera</button>
+        </div> -->
+    </div>
+
+    <script>
+        const temas = {
+          primavera: {
+                icon: '🌸',
+                particles: ['🌸', '🦋', '🌼', '🐝', '☁️'],
+                poema: 'Hay bellezas que no hacen ruido, que no piden ser miradas, pero se quedan en la memoria como una canción suave.'
+            },
+            amanecer: {
+                icon: '☀️',
+                particles: ['☀️', '🌤️', '⭐', '✨'],
+                poema: 'Despierta con el sol naciente,<br>un nuevo día te espera paciente.<br>Llena tu alma de esperanza brillante,<br>y haz de este día algo fascinante.'
+            },
+            oceano: {
+                icon: '🌊',
+                particles: ['🌊', '🐚', '🐠', '💙', '🦈'],
+                poema: 'Como las olas del mar sereno,<br>tu día fluye tranquilo y pleno.<br>Navega con calma en aguas profundas,<br>donde la paz en tu corazón abunda.'
+            },
+            jardin: {
+                icon: '🌺',
+                particles: ['🌸', '🌺', '🌼', '🌻', '🌷', '🌹', '🦋'],
+                poema: 'En el jardín de un nuevo amanecer,<br>cada flor tiene algo que ofrecer.<br>Tú eres la rosa más especial,<br>que perfuma este día primaveral.'
+            },
+            noche: {
+                icon: '🌙',
+                particles: ['⭐', '✨', '🌙', '💫', '🌟'],
+                poema: 'Bajo el manto de estrellas radiantes,<br>tus sueños brillan constantes.<br>Que la magia de esta noche bella,<br>ilumine tu camino como centella.'
+            },
+            
+        };
+
+        // Obtener nombre de la URL
+        const params = new URLSearchParams(window.location.search);
+        const nombre = params.get('nombre') || params.get('name') || 'Amigo';
+        document.getElementById('nombre').textContent = nombre;
+
+        function cambiarTema(tema) {
+            const body = document.body;
+            body.className = tema;
+            
+            document.getElementById('icon').textContent = temas[tema].icon;
+            document.getElementById('poema').innerHTML = temas[tema].poema;
+            
+            crearParticulas(temas[tema].particles);
+        }
+
+        function crearParticulas(particlesArray) {
+            const container = document.getElementById('particles');
+            container.innerHTML = '';
+            
+            for (let i = 0; i < 25; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.textContent = particlesArray[Math.floor(Math.random() * particlesArray.length)];
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 4 + 's';
+                particle.style.animationDuration = (3 + Math.random() * 2) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Inicializar con tema amanecer
+        crearParticulas(temas.amanecer.particles);
+    </script>
+</body>
+</html>

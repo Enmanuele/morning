@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buenos Días</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #667eea;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-section {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        input {
+            padding: 12px 20px;
+            font-size: 1.1em;
+            border: 2px solid #667eea;
+            border-radius: 25px;
+            width: 70%;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            border-color: #764ba2;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        .greeting-section {
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .image-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .image-container svg {
+            width: 200px;
+            height: 200px;
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+        }
+
+        .poem {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #764ba2;
+            margin-top: 20px;
+        }
+
+        .poem p {
+            font-style: italic;
+            line-height: 1.8;
+            color: #2d3436;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        .name-display {
+            color: #764ba2;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¡Buenos Días! ☀️</h1>
+        
+        <div class="input-section">
+            <input type="text" id="nameInput" placeholder="Ingresa tu nombre" />
+            <button onclick="showGreeting()">Saludar</button>
+        </div>
+
+        <div id="greetingSection" class="greeting-section">
+            <h2 style="text-align: center; color: #764ba2; margin-bottom: 20px;">
+                ¡Buenos días, <span class="name-display" id="displayName"></span>!
+            </h2>
+
+            <div class="image-container">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Sol -->
+                    <circle cx="100" cy="100" r="40" fill="#ffd93d"/>
+                    <g stroke="#ffd93d" stroke-width="4" stroke-linecap="round">
+                        <line x1="100" y1="20" x2="100" y2="40"/>
+                        <line x1="100" y1="160" x2="100" y2="180"/>
+                        <line x1="20" y1="100" x2="40" y2="100"/>
+                        <line x1="160" y1="100" x2="180" y2="100"/>
+                        <line x1="35" y1="35" x2="50" y2="50"/>
+                        <line x1="150" y1="150" x2="165" y2="165"/>
+                        <line x1="165" y1="35" x2="150" y2="50"/>
+                        <line x1="50" y1="150" x2="35" y2="165"/>
+                    </g>
+                    <!-- Nube 1 -->
+                    <ellipse cx="50" cy="160" rx="20" ry="12" fill="#e8f4f8"/>
+                    <ellipse cx="65" cy="155" rx="18" ry="10" fill="#e8f4f8"/>
+                    <ellipse cx="35" cy="155" rx="15" ry="10" fill="#e8f4f8"/>
+                    <!-- Nube 2 -->
+                    <ellipse cx="150" cy="170" rx="18" ry="10" fill="#e8f4f8"/>
+                    <ellipse cx="165" cy="167" rx="15" ry="9" fill="#e8f4f8"/>
+                    <ellipse cx="135" cy="167" rx="13" ry="8" fill="#e8f4f8"/>
+                </svg>
+            </div>
+
+            <div class="poem">
+                <p>
+                   Que el sol de hoy ilumine tu camino y cada momento te regale una sonrisa.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Función para obtener parámetros de la URL
+        function getURLParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        function showGreeting() {
+            const name = document.getElementById('nameInput').value.trim();
+            
+            if (name === '') {
+                alert('Por favor, ingresa tu nombre');
+                return;
+            }
+            
+            document.getElementById('displayName').textContent = name;
+            document.getElementById('greetingSection').style.display = 'block';
+            document.querySelector('.input-section').style.display = 'none';
+        }
+
+        // Permitir presionar Enter para saludar
+        document.getElementById('nameInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                showGreeting();
+            }
+        });
+
+        // Cargar nombre desde URL al iniciar
+        window.addEventListener('DOMContentLoaded', function() {
+            const nameFromURL = getURLParameter('nombre');
+            
+            if (nameFromURL) {
+                document.getElementById('displayName').textContent = nameFromURL;
+                document.getElementById('greetingSection').style.display = 'block';
+                document.querySelector('.input-section').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
